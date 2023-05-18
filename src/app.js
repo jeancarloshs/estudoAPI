@@ -28,15 +28,6 @@ app.get("/", (req, res) => {
   res.status(200).send("Server iniciado");
 });
 
-app.get("/livros", async (req, res) => {
-  try {
-    const getLivros = await livros.find();
-    res.status(200).json(getLivros);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 app.get("/livros/:id", (req, res) => {
   let index = buscaLivros(req.params.id);
   res.json(livros[index]);
