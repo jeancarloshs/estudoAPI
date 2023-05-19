@@ -13,9 +13,9 @@ const app = express();
 // e transformar aquilo em um objeto para eu poder armazenar, visualizar e manipular.
 app.use(express.json());
 
-function buscaLivros(id) {
-  return livros.findIndex((livro) => livro.id == id);
-}
+// function buscaLivros(id) {
+//   return livros.findIndex((livro) => livro.id == id);
+// }
 
 // const livros = [
 //     {id: 1, "titulo": "Senhor dos aneis", "autor": "J. R. R. Tolkien"},
@@ -28,10 +28,10 @@ app.get("/", (req, res) => {
   res.status(200).send("Server iniciado");
 });
 
-app.get("/livros/:id", (req, res) => {
-  let index = buscaLivros(req.params.id);
-  res.json(livros[index]);
-});
+// app.get("/livros/:id", (req, res) => {
+//   let index = buscaLivros(req.params.id);
+//   res.json(livros[index]);
+// });
 
 // Passamos o req (Require) no body (corpo da requisição) para que o usuario possa digitar as informações
 app.post("/livros", (req, res) => {
