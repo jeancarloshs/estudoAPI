@@ -13,5 +13,9 @@ const port = process.env.PORT || 3000;
 
 // A porta que o servidor ira ouvir
 app.listen(port, () => {
-  console.log(`Servidor iniciado: http://localhost:${port}`);
+  console.log(" ");
+  console.log(`############################################`);
+  console.log(`# Servidor iniciado: http://localhost:${port} #`);
+  console.log(`############################################`);
+  console.log(" ");
 });

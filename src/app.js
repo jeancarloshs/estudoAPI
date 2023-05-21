@@ -1,11 +1,21 @@
 import express from "express";
 import db from "./config/dbConnect.js";
 import livros from "./models/Livro.js";
+import routes from "./routes/index.js"
 
-db.on("error", console.log.bind(console, "Erro de conexão!!!"));
-db.once("open", () => {
-  console.log("Conexão com o Banco feita com sucesso");
-});
+try {
+  db.once("open", () => {
+    console.log(" ");
+    console.log("-----------------------------------------");
+    console.log("- Conexão com o Banco feita com sucesso -");
+    console.log("-----------------------------------------");
+    console.log(" ");
+  });
+} catch (err) {
+  db.on("error", console.log.bind(console, "Erro de conexão!!!", err));
+}
+
+
 
 const app = express();
 
@@ -13,31 +23,7 @@ const app = express();
 // e transformar aquilo em um objeto para eu poder armazenar, visualizar e manipular.
 app.use(express.json());
 
-// function buscaLivros(id) {
-//   return livros.findIndex((livro) => livro.id == id);
-// }
-
-// const livros = [
-//     {id: 1, "titulo": "Senhor dos aneis", "autor": "J. R. R. Tolkien"},
-//     {id: 2, "titulo": "O Hobbit", "autor": "J. R. R. Tolkien"},
-//     {id: 3, "titulo": "O Silmarillion", "autor": "J. R. R. Tolkien"}
-// ]
-
-// Passamos o res (Response) para devolver uma mensagem na requisição para o usuario
-app.get("/", (req, res) => {
-  res.status(200).send("Server iniciado");
-});
-
-// app.get("/livros/:id", (req, res) => {
-//   let index = buscaLivros(req.params.id);
-//   res.json(livros[index]);
-// });
-
-// Passamos o req (Require) no body (corpo da requisição) para que o usuario possa digitar as informações
-app.post("/livros", (req, res) => {
-  livros.push(req.body);
-  res.status(201).send("Livro cadastrado com sucesso");
-});
+routes(app);
 
 // Atualiza o campo titulo do livro
 // para manipular array que é o find index que consigo achar dado algum parâmetro,
