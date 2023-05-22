@@ -15,8 +15,6 @@ try {
   db.on("error", console.log.bind(console, "Erro de conexão!!!", err));
 }
 
-
-
 const app = express();
 
 // é um recurso do Express que vai conseguir fazer interpretar o que está chegando via post ou via put

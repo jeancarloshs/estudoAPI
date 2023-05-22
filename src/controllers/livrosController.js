@@ -30,27 +30,36 @@ class LivroController {
     try {
       // Passamos o req (Require) no body (corpo da requisição) para que o usuario possa digitar as informações
       let livro = new livros(req.body);
+      livro.save();
       return res.status(201).send(JSON.stringify(livro.toJSON()));
     } catch (err) {
-      res.status(500).send({ message: `${err.message} - falha ao cadastrar livro` });
+      res
+        .status(500)
+        .send({ message: `${err.message} - falha ao cadastrar livro` });
     }
   };
 
   static atualizarLivro = async (req, res) => {
     try {
-
+      const id = req.params.id;
+      livros.findByIdAndUpdate(id, {$set: req.body})
+      res.status(200).send({ message: `Livro atualizado com sucesso`})
     } catch (err) {
-      res.status(500).send({ menssage: `${err.message} - Falha ao atualizar livro.` })
+      res
+        .status(500)
+        .send({ menssage: `${err.message} - Falha ao atualizar livro.` });
     }
-  }
+  };
 
   static deletaLivro = async (req, res) => {
     try {
 
     } catch (err) {
-      res.status(500).send({ menssage: `${err.message} - Falha ao deleitar livro.` })
+      res
+        .status(500)
+        .send({ menssage: `${err.message} - Falha ao deletar livro.` });
     }
-  }
+  };
 }
 
 export default LivroController;
