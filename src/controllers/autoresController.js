@@ -1,11 +1,11 @@
-import livros from "../models/Livro.js";
+import autores from "../models/Autor.js";
 
 // Vamos criar os métodos no tipo estático para que não precisemos instanciar essa classe.
-class LivroController {
-  static listarLivros = async (req, res) => {
+class AutoresController {
+  static listarAutores = async (req, res) => {
     try {
-      const getLivros = await livros.find();
-      res.status(200).json(getLivros);
+      const getAutores = await autores.find();
+      res.status(200).json(getAutores);
     } catch (err) {
       res
         .status(500)
@@ -13,19 +13,19 @@ class LivroController {
     }
   };
 
-  static buscaLivroID = async (req, res) => {
+  static buscaAutoresID = async (req, res) => {
     try {
-      let index = buscaLivros(req.params.id);
-      res.json(livros[index]);
+      let index = buscaAutores(req.params.id);
+      res.json(autores[index]);
     } catch (err) {
       res.status(500).json(err);
     }
   };
 
-  static cadastrarLivro = async (req, res) => {
+  static cadastrarAutores = async (req, res) => {
     try {
       // Passamos o req (Require) no body (corpo da requisição) para que o usuario possa digitar as informações
-      let livro = new livros(req.body);
+      let livro = new autores(req.body);
       livro.save();
       return res.status(201).send(JSON.stringify(livro.toJSON()));
     } catch (err) {
@@ -35,11 +35,11 @@ class LivroController {
     }
   };
 
-  static atualizarLivro = async (req, res) => {
+  static atualizarAutores = async (req, res) => {
     try {
       const id = req.params.id;
-      livros.findByIdAndUpdate(id, {$set: req.body})
-      res.status(200).send({ message: `Livro atualizado com sucesso`})
+      autores.findByIdAndUpdate(id, {$set: req.body})
+      res.status(200).send({ message: `Autores atualizado com sucesso`})
     } catch (err) {
       res
         .status(500)
@@ -47,7 +47,7 @@ class LivroController {
     }
   };
 
-  static deletaLivro = async (req, res) => {
+  static deletaAutores = async (req, res) => {
     try {
 
     } catch (err) {
@@ -58,4 +58,4 @@ class LivroController {
   };
 }
 
-export default LivroController;
+export default AutoresController;
